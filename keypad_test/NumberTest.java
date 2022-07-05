@@ -38,4 +38,10 @@ public class NumberTest {
         Keypad k = new Keypad(new String[][]{{"*","0","#"},{"7","8","9"},{"4","5","6"},{"1","2","3"}});
         assertFalse(k.checkEasyNumber("789 456 123"));
     }
+
+    @Test
+    public void alternateKeypadLayout3() {
+        Keypad k = new Keypad(new String[][]{{"*","0","#"},{"1","2","3"}});
+        assertTrue(k.checkEasyNumber("123"));
+    }
 }

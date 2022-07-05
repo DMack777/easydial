@@ -11,15 +11,20 @@ class Keypad
     // constructor places the keypad into a slightly larger 2d array to enable
     // quicker searching of adjacent keys around each key on the keypad.
     // the 2D keypad is surrounded by blank values.
-    Keypad(String[][] k){
+    Keypad(String[][] keypad){
+
         //place keys in slightly bigger 2d array
-        keys = new String[k.length+2][k[0].length+2];
+        int keypadWidth = keypad[0].length;
+        int keypadDepth = keypad.length;
+        keys = new String[keypadDepth+2][keypadWidth+2];
+
+        //iterate through original keypad and place on new layout
         for (int i = 0; i < keys.length; i++) {        
             for (int j = 0; j < keys[i].length; j++) {
-                if (i==0 || j==0 ||i==k.length+1 || j==k.length) {
+                if (i==0 || j==0 || i==keypadDepth+1 || j==keypadWidth+1) {
                     keys[i][j] = "";
                 }else {
-                    keys[i][j] = k[i-1][j-1];
+                    keys[i][j] = keypad[i-1][j-1];
                 }
             }
          }
@@ -33,17 +38,17 @@ class Keypad
     private void findAdjacent(){
         for (int row = 1; row < keys.length-1; row++) { 
             for (int col = 1; col < keys[row].length-1; col++) { 
-                List<String> l = new ArrayList<String>();
-                l.add(keys[row-1][col-1]);
-                l.add(keys[row-1][col]);
-                l.add(keys[row-1][col+1]);
-                l.add(keys[row][col-1]);
-                l.add(keys[row][col+1]);
-                l.add(keys[row+1][col-1]);
-                l.add(keys[row+1][col]);
-                l.add(keys[row+1][col+1]);
-                l.add(keys[row][col]);
-                adjacents.put(keys[row][col],l);
+                List<String> listAdjacent = new ArrayList<String>();
+                listAdjacent.add(keys[row-1][col-1]);
+                listAdjacent.add(keys[row-1][col]);
+                listAdjacent.add(keys[row-1][col+1]);
+                listAdjacent.add(keys[row][col-1]);
+                listAdjacent.add(keys[row][col+1]);
+                listAdjacent.add(keys[row+1][col-1]);
+                listAdjacent.add(keys[row+1][col]);
+                listAdjacent.add(keys[row+1][col+1]);
+                listAdjacent.add(keys[row][col]);
+                adjacents.put(keys[row][col],listAdjacent);
             } 
         }
     }
